@@ -95,7 +95,7 @@ elif modo == 'Calcular Dosis Actual (ppm)':
         
     st.write('---')
 
-    if st.button('Calcular Dosis (mg/L)', type="primary"):
+    if st.button('Calcular Dosis (ppm)', type="primary"):
         if Q > 0 and S > 0 and volumen_mLmin > 0:
             
             # Reordenamos la fórmula original para despejar D (Dosis)
