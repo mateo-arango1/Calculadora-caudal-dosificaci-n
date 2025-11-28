@@ -36,8 +36,8 @@ if modo == 'Calcular Caudal de Dosificación (mL/min)':
     with col1:
         st.subheader("Datos de Caudal (m³/h)")
         # USAMOS X.0 PARA EVITAR EL ERROR
-        Qe = st.number_input('Caudal de Entrada (Qe):', min_value=0.0, value=50, help="Caudal de agua fresca que entra a la planta.")
-        Qr = st.number_input('Caudal de Recirculación (Qr):', min_value=0.0, value=60, help="Caudal de agua recirculada.")
+        Qe = st.number_input('Caudal de Entrada (Qe):', min_value=0, value=50, help="Caudal de agua fresca que entra a la planta.")
+        Qr = st.number_input('Caudal de Recirculación (Qr):', min_value=0, value=60, help="Caudal de agua recirculada.")
         
         Q = Qe + Qr
         st.info(f"Caudal Total (Qe + Qr): **{Q:.2f} m³/h**")
