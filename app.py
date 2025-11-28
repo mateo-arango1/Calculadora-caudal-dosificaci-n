@@ -44,9 +44,9 @@ if modo == 'Calcular Caudal de Dosificación (mL/min)':
 
     with col2:
         st.subheader("Datos de Dosificación")
-        D = st.number_input('Dosis Requerida (ppm):', min_value=0.0, value=2.0, help="Cantidad de químico activo que se necesita por litro.")
+        D = st.number_input('Dosis Requerida (ppm):', min_value=0, value=100, help="Cantidad de químico activo que se necesita por litro.")
         # USAMOS X.0 PARA EVITAR EL ERROR
-        S = st.number_input('Concentración Producto (%):', min_value=0.0, max_value=100.0, value=40.0, help="Porcentaje de ingrediente activo en el producto químico.")
+        S = st.number_input('Concentración Producto (%):', min_value=0, max_value=100, value=40, help="Porcentaje de ingrediente activo en el producto químico.")
         
     st.write('---')
 
@@ -85,8 +85,8 @@ elif modo == 'Calcular Dosis Actual (ppm)':
     with col1:
         st.subheader("Datos de Caudal (m³/h)")
         # USAMOS X.0 PARA EVITAR EL ERROR
-        Qe = st.number_input('Caudal de Entrada (Qe):', min_value=0.0, value=50.0, key='Qe_dosis', help="Caudal de agua fresca que entra a la planta.")
-        Qr = st.number_input('Caudal de Recirculación (Qr):', min_value=0.0, value=60.0, key='Qr_dosis', help="Caudal de agua recirculada.")
+        Qe = st.number_input('Caudal de Entrada (Qe):', min_value=0, value=50, key='Qe_dosis', help="Caudal de agua fresca que entra a la planta.")
+        Qr = st.number_input('Caudal de Recirculación (Qr):', min_value=0, value=60, key='Qr_dosis', help="Caudal de agua recirculada.")
         
         Q = Qe + Qr
         st.info(f"Caudal Total (Qe + Qr): **{Q:.2f} m³/h**")
@@ -94,9 +94,9 @@ elif modo == 'Calcular Dosis Actual (ppm)':
     with col2:
         st.subheader("Datos de Dosificación")
         # USAMOS X.0 PARA EVITAR EL ERROR
-        S = st.number_input('Concentración Producto (%):', min_value=0.0, max_value=100.0, value=40.0, key='S_dosis', help="Porcentaje de ingrediente activo en el producto químico.")
+        S = st.number_input('Concentración Producto (%):', min_value=0, max_value=100, value=40, key='S_dosis', help="Porcentaje de ingrediente activo en el producto químico.")
         # ESTE YA TENÍA DECIMAL:
-        volumen_mLmin = st.number_input('Caudal de Dosificación (mL/min):', min_value=0.0, value=10.0, format="%.2f", help="Caudal que la bomba está dosificando actualmente.")
+        volumen_mLmin = st.number_input('Caudal de Dosificación (mL/min):', min_value=0, value=300, help="Caudal que la bomba está dosificando actualmente.")
         
     st.write('---')
 
