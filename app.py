@@ -36,8 +36,8 @@ if modo == 'Calcular Caudal de Dosificación (mL/min)':
     with col1:
         st.subheader("Datos de Caudal (m³/h)")
         # USAMOS X.0 PARA EVITAR EL ERROR
-        Qe = st.number_input('Caudal de Entrada (Qe):', min_value=0.0, value=50.0, help="Caudal de agua fresca que entra a la planta.")
-        Qr = st.number_input('Caudal de Recirculación (Qr):', min_value=0.0, value=60.0, help="Caudal de agua recirculada.")
+        Qe = st.number_input('Caudal de Entrada (Qe):', min_value=0.0, value=50, help="Caudal de agua fresca que entra a la planta.")
+        Qr = st.number_input('Caudal de Recirculación (Qr):', min_value=0.0, value=60, help="Caudal de agua recirculada.")
         
         Q = Qe + Qr
         st.info(f"Caudal Total (Qe + Qr): **{Q:.2f} m³/h**")
@@ -69,7 +69,7 @@ if modo == 'Calcular Caudal de Dosificación (mL/min)':
                 volumen_mLmin = volumen_Lh * 1000 / 60
 
                 st.success("✅ Cálculo Exitoso")
-                st.metric(label="Caudal de Dosificación Requerido", value=f"{volumen_mLmin:.3f} mL/min")
+                st.metric(label="Caudal de Dosificación Requerido", value=f"{volumen_mLmin:.2f} mL/min")
         else:
             st.warning("Por favor, asegúrese de que todos los valores sean mayores a cero.")
 
@@ -123,6 +123,6 @@ elif modo == 'Calcular Dosis Actual (ppm)':
                 dosis_mg_l = masa_activa_g_h / denominador
 
                 st.success("✅ Cálculo Exitoso")
-                st.metric(label="Dosis Actual (ppm)", value=f"{dosis_mg_l:.3f} ppm")
+                st.metric(label="Dosis Actual (ppm)", value=f"{dosis_mg_l:.2f} ppm")
         else:
             st.warning("Por favor, ingrese valores válidos mayores a cero.")
