@@ -164,7 +164,7 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
         D_base * ppm_factor_4
     ]
         
-    st.info(f"Se calculará la dosificación para las dosis (ppm): {dosis_ppm[0]}, {dosis_ppm[1]}, {dosis_ppm[2]}, {dosis_ppm[3]}")
+    st.info(f"Se calculará la dosificación para las dosis (ppm): {dosis_ppm[0]:.0f}, {dosis_ppm[1]:.0f}, {dosis_ppm[2]:.0f}, {dosis_ppm[3]:.0f}")
         
     st.write('---')
 
