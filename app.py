@@ -197,10 +197,10 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
     col_dosis = st.columns(4)
     
     # NOTA: Los valores iniciales (value) son solo sugerencias.
-    ppm_jarra_1 = col_dosis[0].number_input('Jarra 1 (ppm):', min_value=0.0, value=1.0, format="%.1f", key='ppm_j1')
-    ppm_jarra_2 = col_dosis[1].number_input('Jarra 2 (ppm):', min_value=0.0, value=1.2, format="%.1f", key='ppm_j2')
-    ppm_jarra_3 = col_dosis[2].number_input('Jarra 3 (ppm):', min_value=0.0, value=1.4, format="%.1f", key='ppm_j3')
-    ppm_jarra_4 = col_dosis[3].number_input('Jarra 4 (ppm):', min_value=0.0, value=1.6, format="%.1f", key='ppm_j4')
+    ppm_jarra_1 = col_dosis[0].number_input('Jarra 1 (ppm):', min_value=0.0, value=100.0, format="%.1f", key='ppm_j1')
+    ppm_jarra_2 = col_dosis[1].number_input('Jarra 2 (ppm):', min_value=0.0, value=120.0, format="%.1f", key='ppm_j2')
+    ppm_jarra_3 = col_dosis[2].number_input('Jarra 3 (ppm):', min_value=0.0, value=140.0, format="%.1f", key='ppm_j3')
+    ppm_jarra_4 = col_dosis[3].number_input('Jarra 4 (ppm):', min_value=0.0, value=160.0, format="%.1f", key='ppm_j4')
         
     dosis_ppm = [ppm_jarra_1, ppm_jarra_2, ppm_jarra_3, ppm_jarra_4]
     
