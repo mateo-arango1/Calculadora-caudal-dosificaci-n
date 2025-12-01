@@ -141,21 +141,21 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
 
     with col1:
         st.subheader("Datos del Producto")
-        S_jarra = st.number_input('Concentración Producto (%):', min_value=0.0, max_value=100.0, value=10.0, format="%.1f", key='S_jarra', help="Porcentaje de ingrediente activo en el producto químico.")
+        S_jarra = st.number_input('Concentración Producto (%):', min_value=0.0, max_value=100.0, value=40.0, key='S_jarra', help="Porcentaje de ingrediente activo en el producto químico.")
         
     with col2:
         st.subheader("Datos de la Prueba")
         Vol_jarra_L = st.number_input('Volumen de la Jarra (L):', min_value=0.1, value=1.0, key='Vol_jarra', help="Volumen de agua que contendrá cada jarra (ej: 1 Litro, 0.5 Litros, etc.).")
-        D_base = st.number_input('Dosis Inicial (ppm):', min_value=0.01, value=1.0, format="%.1f", key='D_jarra', help="Dosis inicial para la primera jarra.")
+        D_base = st.number_input('Dosis Inicial (ppm):', min_value=0.01, value=1.0, key='D_jarra', help="Dosis inicial para la primera jarra.")
         
         
     st.subheader("Definición de Dosis para Jarras")
     
     # Input para definir las dosis de las 4 jarras
     # La Jarra 1 ya usa D_base
-    ppm_factor_2 = st.number_input('Factor Multiplicador Jarra 2:', min_value=0.0, value=1.2, format="%.1f", help="Factor para Jarra 2 (ej: 1.5 para 50% más de dosis).")
-    ppm_factor_3 = st.number_input('Factor Multiplicador Jarra 3:', min_value=0.0, value=1.4, format="%.1f", help="Factor para Jarra 3 (ej: 2.0 para el doble de dosis).")
-    ppm_factor_4 = st.number_input('Factor Multiplicador Jarra 4:', min_value=0.0, value=1.6, format="%.1f", help="Factor para Jarra 4 (ej: 2.5 para 2.5 veces la dosis inicial).")
+    ppm_factor_2 = st.number_input('Factor Multiplicador Jarra 2:', min_value=0.0, value=1.5, format="%.2f", help="Factor para Jarra 2 (ej: 1.5 para 50% más de dosis).")
+    ppm_factor_3 = st.number_input('Factor Multiplicador Jarra 3:', min_value=0.0, value=2.0, format="%.2f", help="Factor para Jarra 3 (ej: 2.0 para el doble de dosis).")
+    ppm_factor_4 = st.number_input('Factor Multiplicador Jarra 4:', min_value=0.0, value=2.5, format="%.2f", help="Factor para Jarra 4 (ej: 2.5 para 2.5 veces la dosis inicial).")
         
     dosis_ppm = [
         D_base * 1.0,
@@ -200,7 +200,7 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
                 # Mostrar los resultados en columnas
                 cols = st.columns(4)
                 for i, (label, ml) in enumerate(resultados.items()):
-                    cols[i].metric(label=label, value=f"{ml:.1} mL")
+                    cols[i].metric(label=label, value=f"{ml:.3f} mL")
         
         else:
             st.warning("Por favor, ingrese valores de concentración y volumen válidos.")
