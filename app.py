@@ -8,11 +8,24 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# --- FORZAR LA SIDEBAR SIEMPRE VISIBLE (CSS) ---
+# --- CSS PARA EVITAR EL TEXTO VERTICAL EN LA SIDEBAR COLAPSADA (este es el importante) ---
 st.markdown(
     """
     <style>
-    /* Forzar que la sidebar siempre esté visible */
+    /* Ocultar la sidebar cuando está colapsada (evita texto vertical en celular) */
+    [data-testid="stSidebar"][aria-expanded="false"] {
+        display: none !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# --- TU CSS ANTERIOR (opcional, no afecta) ---
+st.markdown(
+    """
+    <style>
+    /* Forzar que la sidebar siempre esté visible cuando está expandida */
     [data-testid="stSidebar"] { 
         visibility: visible !important;
         transform: none !important;
