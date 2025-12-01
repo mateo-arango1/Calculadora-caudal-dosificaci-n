@@ -134,50 +134,46 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
     
     st.header('3. Dosificación para Prueba de Jarras')
     
-    st.markdown("Calcule los mL de producto concentrado necesarios para alcanzar una dosis específica (ppm) en las jarras de prueba.")
+    st.markdown("Ingrese la dosis específica (en ppm) que desea probar en cada una de las jarras.")
     st.write('---')
     
     col1, col2 = st.columns(2)
 
     with col1:
         st.subheader("Datos del Producto")
-        S_jarra = st.number_input('Concentración Producto (%):', min_value=0.01, max_value=100.00, value=10.00, key='S_jarra', help="Porcentaje de ingrediente activo en el producto químico.")
+        # Mantengo tu formato de decimales para el porcentaje
+        S_jarra = st.number_input('Concentración Producto (%):', min_value=0.01, max_value=100.00, value=10.00, format="%.2f", key='S_jarra', help="Porcentaje de ingrediente activo en el producto químico.")
         
     with col2:
         st.subheader("Datos de la Prueba")
-        Vol_jarra_L = st.number_input('Volumen de la Jarra (L):', min_value=0.1, value=1.0, format="%.1f", key='Vol_jarra', help="Volumen de agua que contendrá cada jarra (ej: 1 Litro, 0.5 Litros, etc.).")
-        D_base = st.number_input('Dosis Inicial (ppm):', min_value=0.01, value=100.00, key='D_jarra', help="Dosis inicial para la primera jarra.")
+        # Mantengo tu formato de decimales para el volumen
+        Vol_jarra_L = st.number_input('Volumen de la Jarra (L):', min_value=0.1, value=1.0, format="%.1f", key='Vol_jarra', help="Volumen de agua que contendrá cada jarra (típicamente 1 Litro).")
         
-        
-    st.subheader("Definición de Dosis para Jarras")
+    st.subheader("Dosis (ppm) por Jarra")
     
-    # Input para definir las dosis de las 4 jarras
-    # La Jarra 1 ya usa D_base
-    ppm_factor_2 = st.number_input('Factor Multiplicador Jarra 2:', min_value=0.0, value=1.2, format="%.1f", help="Factor para Jarra 2 (ej: 1.2 para 20% más de dosis).")
-    ppm_factor_3 = st.number_input('Factor Multiplicador Jarra 3:', min_value=0.0, value=1.4, format="%.1f", help="Factor para Jarra 3 (ej: 1.4 para 40% más de dosis).")
-    ppm_factor_4 = st.number_input('Factor Multiplicador Jarra 4:', min_value=0.0, value=1.6, format="%.1f", help="Factor para Jarra 4 (ej: 1.6 para 60% más de la dosis inicial).")
+    # ENTRADA MANUAL DE PPM PARA LAS 4 JARRAS EN COLUMNAS
+    
+    col_dosis = st.columns(4)
+    
+    # NOTA: Los valores iniciales (value) son solo sugerencias.
+    ppm_jarra_1 = col_dosis[0].number_input('Jarra 1 (ppm):', min_value=0.0, value=1.0, format="%.1f", key='ppm_j1')
+    ppm_jarra_2 = col_dosis[1].number_input('Jarra 2 (ppm):', min_value=0.0, value=1.2, format="%.1f", key='ppm_j2')
+    ppm_jarra_3 = col_dosis[2].number_input('Jarra 3 (ppm):', min_value=0.0, value=1.4, format="%.1f", key='ppm_j3')
+    ppm_jarra_4 = col_dosis[3].number_input('Jarra 4 (ppm):', min_value=0.0, value=1.6, format="%.1f", key='ppm_j4')
         
-    dosis_ppm = [
-        D_base * 1.0,
-        D_base * ppm_factor_2,
-        D_base * ppm_factor_3,
-        D_base * ppm_factor_4
-    ]
-        
-    st.info(f"Se calculará la dosificación para las dosis (ppm): {dosis_ppm[0]:.0f}, {dosis_ppm[1]:.0f}, {dosis_ppm[2]:.0f}, {dosis_ppm[3]:.0f}")
+    dosis_ppm = [ppm_jarra_1, ppm_jarra_2, ppm_jarra_3, ppm_jarra_4]
+    
+    # Mostrar la dosis total seleccionada
+    st.info(f"Se calculará la dosificación para las dosis (ppm): {dosis_ppm[0]:.1f}, {dosis_ppm[1]:.1f}, {dosis_ppm[2]:.1f}, {dosis_ppm[3]:.1f}")
         
     st.write('---')
 
     if st.button('Calcular mL para Jarras', type="primary"):
+        
+        # Validación de que al menos la concentración del producto y el volumen de jarra sean válidos.
         if S_jarra > 0 and Vol_jarra_L > 0:
             
-            # ACTIVO DISPONIBLE POR LITRO EN EL PRODUCTO
-            # Si S=40%, significa que 1 Litro de producto (1000 mL) tiene 400g de activo.
-            # Como la densidad es 1 g/mL, 1 Litro de producto pesa 1000 g.
-            # g de activo / L de producto = (Densidad * 1000) * (S / 100) -> 1 * 1000 * (40/100) = 400 g/L
-            # Sin embargo, la fórmula más simple para Jar Tests es:
-            # mL de producto = (PPM_Deseada * Vol_Jarra_L) / (S_producto * 10)
-            
+            # FÓRMULA DE JAR TEST: mL_producto = (PPM_Deseada * Vol_Jarra_L) / (S_producto * 10)
             denominador = S_jarra * 10
             
             resultados = {}
@@ -191,16 +187,17 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
                 # Bucle para calcular los 4 resultados
                 for i, D_ppm in enumerate(dosis_ppm):
                     
-                    # Cálculo: mL_producto = (Dosis_ppm * Vol_jarra_L) / (S_jarra * 10)
+                    # Cálculo:
                     mL_producto = (D_ppm * Vol_jarra_L) / denominador
                     
-                    # Guardar el resultado para mostrarlo
+                    # Guardar el resultado para mostrarlo, manteniendo tu formato de salida (.1f mL)
                     resultados[f"Jarra {i+1} ({D_ppm:.1f} ppm)"] = mL_producto
                 
                 # Mostrar los resultados en columnas
                 cols = st.columns(4)
                 for i, (label, ml) in enumerate(resultados.items()):
+                    # Mantengo tu formato de salida (.1f mL)
                     cols[i].metric(label=label, value=f"{ml:.1f} mL")
         
         else:
-            st.warning("Por favor, ingrese valores de concentración y volumen válidos.")
+            st.warning("Por favor, ingrese valores de concentración y volumen válidos (> 0).")
