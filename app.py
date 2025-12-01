@@ -125,3 +125,69 @@ elif modo == 'Calcular Dosis Actual (ppm)':
                 st.metric(label="Dosis Actual (ppm)", value=f"{dosis_mg_l:.2f} ppm")
         else:
             st.warning("Por favor, ingrese valores válidos mayores a cero.")
+
+# =====================================================================
+## 🧪 MODO 3: DOSIFICACIÓN EN JARRAS (mL de producto)
+# =====================================================================
+elif modo == 'Dosificación en Jarras (mL de producto)':
+    
+    st.header('3. Dosificación para Prueba de Jarras')
+    
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("Datos de Producto")
+        S_jarra = st.number_input('Concentración Producto (%):', min_value=0.0, max_value=100.0, value=40.0, key='S_jarra', help="Porcentaje de ingrediente activo en el producto químico.")
+        D_base = st.number_input('Dosis Inicial (ppm):', min_value=0.0, value=1.0, key='D_jarra', help="Dosis inicial para la primera jarra.")
+        
+    with col2:
+        st.subheader("Datos de la Prueba")
+        Vol_jarra_L = st.number_input('Volumen de la Jarra (L):', min_value=0.01, value=1.0, key='Vol_jarra', help="Volumen de agua que contendrá cada jarra (típicamente 1 Litro).")
+        
+        # Las dosis que quieres probar (4 resultados)
+        ppm_jarra_1 = D_base
+        ppm_jarra_2 = D_base * 1.5  # Ejemplo: 50% más
+        ppm_jarra_3 = D_base * 2.0  # Ejemplo: el doble
+        ppm_jarra_4 = D_base * 2.5  # Ejemplo: 2.5 veces
+        
+        dosis_ppm = [ppm_jarra_1, ppm_jarra_2, ppm_jarra_3, ppm_jarra_4]
+        
+        st.info(f"Se calculará la dosificación para las siguientes dosis (ppm): {dosis_ppm}")
+        
+    st.write('---')
+
+    if st.button('Calcular mL para Jarras', type="primary"):
+        if S_jarra > 0 and Vol_jarra_L > 0:
+            
+            # Cálculo de la constante para un Jar Test (factor de conversión)
+            # Objetivo: obtener mL de producto necesarios para una dosis D (en ppm)
+            # Fórmula general: mL_producto = (Dosis_ppm * Vol_jarra_L) / (S_producto * 10)
+            
+            # Denominador: Concentración del producto en una forma conveniente
+            # Asumiendo 1 g/mL de densidad, el factor es (S * 10)
+            denominador = S_jarra * 10
+            
+            resultados = {}
+            if denominador == 0:
+                st.error("Error: La concentración del producto no puede ser cero.")
+            else:
+                
+                st.success("✅ Cálculo Exitoso")
+                st.markdown("##### Mililitros (mL) de producto a dosificar por jarra:")
+                
+                # Bucle para calcular los 4 resultados
+                for i, D_ppm in enumerate(dosis_ppm):
+                    
+                    # mL_producto = (Dosis_ppm * Vol_jarra_L) / denominador
+                    mL_producto = (D_ppm * Vol_jarra_L) / denominador
+                    
+                    # Guardar el resultado para mostrarlo
+                    resultados[f"Jarra {i+1} ({D_ppm} ppm)"] = mL_producto
+                
+                # Mostrar los resultados en una tabla o columnas
+                cols = st.columns(4)
+                for i, (label, ml) in enumerate(resultados.items()):
+                    cols[i].metric(label=label, value=f"{ml:.3f} mL")
+        
+        else:
+            st.warning("Por favor, ingrese valores de concentración y volumen válidos.")
