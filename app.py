@@ -8,6 +8,23 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# --- FORZAR LA SIDEBAR SIEMPRE VISIBLE (CSS) ---
+st.markdown(
+    """
+    <style>
+    /* Forzar que la sidebar siempre esté visible */
+    [data-testid="stSidebar"] { 
+        visibility: visible !important;
+        transform: none !important;
+    }
+    [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {
+        margin-left: 0 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # --- Información en la Barra Lateral ---
 st.sidebar.header("Contacto y Soporte 📞")
 st.sidebar.markdown("""
