@@ -145,7 +145,7 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
         
     with col2:
         st.subheader("Datos de la Prueba")
-        Vol_jarra_L = st.number_input('Volumen de la Jarra (L):', min_value=0.1, value=1.0, key='Vol_jarra', help="Volumen de agua que contendrá cada jarra (ej: 1 Litro, 0.5 Litros, etc.).")
+        Vol_jarra_L = st.number_input('Volumen de la Jarra (L):', min_value=0.1, value=1.0, format="%.1f", key='Vol_jarra', help="Volumen de agua que contendrá cada jarra (ej: 1 Litro, 0.5 Litros, etc.).")
         D_base = st.number_input('Dosis Inicial (ppm):', min_value=0.01, value=100.00, key='D_jarra', help="Dosis inicial para la primera jarra.")
         
         
