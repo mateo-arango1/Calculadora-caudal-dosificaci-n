@@ -42,11 +42,11 @@ if modo == 'Calcular Caudal de Dosificación (mL/min)':
         Qr = st.number_input('Caudal de Recirculación (Qr):', min_value=0, value=60, help="Caudal de agua recirculada.")
         
         Q = Qe + Qr
-        st.info(f"Caudal Total (Qe + Qr): **{Q:.2f} m³/h**")
+        st.info(f"Caudal Total (Qe + Qr): **{Q:.1f} m³/h**")
 
     with col2:
         st.subheader("Datos de Dosificación")
-        D = st.number_input('Dosis Requerida (ppm):', min_value=0, value=2, help="Cantidad de químico activo que se necesita por litro.")
+        D = st.number_input('Dosis Requerida (ppm):', min_value=0, value=100, help="Cantidad de químico activo que se necesita por litro.")
         S = st.number_input('Concentración Producto (%):', min_value=0, max_value=100, value=40, help="Porcentaje de ingrediente activo en el producto químico.")
         
     st.write('---')
