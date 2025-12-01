@@ -8,6 +8,18 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# --- Información en la Barra Lateral ---
+st.sidebar.header("Contacto y Soporte 📞")
+st.sidebar.markdown("""
+Esta aplicación fue desarrollada por **Mateo Arango Quintero**.
+
+Para sugerencias, reportar errores o solicitar nuevas funcionalidades:
+* **Correo de Contacto:** `mateo.arango.q1@gmail.com`
+""")
+st.sidebar.write("---")
+st.sidebar.info("Versión: 1.2 (3 Modos de Cálculo)")
+
+
 st.title('🧪 Calculadora de Dosificación y Test de jarras')
 st.markdown("---")
 
