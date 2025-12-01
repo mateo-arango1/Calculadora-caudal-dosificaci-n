@@ -12,23 +12,13 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* Asegurar que la sidebar esté visible siempre */
-    section[data-testid="stSidebar"] {
-        display: block !important;
-    }
-
-    /* Forzar ancho y evitar que desaparezca */
-    [data-testid="stSidebar"] {
-        width: 300px !important;
-        min-width: 300px !important;
+    /* Forzar que la sidebar siempre esté visible */
+    [data-testid="stSidebar"] { 
         visibility: visible !important;
-        transform: translateX(0) !important;
+        transform: none !important;
     }
-
-    /* Evitar que Streamlit la esconda */
-    [data-testid="stSidebar"][aria-expanded="false"] {
-        transform: translateX(0) !important;
-        visibility: visible !important;
+    [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {
+        margin-left: 0 !important;
     }
     </style>
     """,
@@ -45,7 +35,6 @@ Para sugerencias, reportar errores o solicitar nuevas funcionalidades:
 """)
 st.sidebar.write("---")
 st.sidebar.info("Versión: 1.2 (3 Modos de Cálculo)")
-
 
 st.title('🧪 Calculadora de Dosificación y Test de jarras')
 st.markdown("---")
