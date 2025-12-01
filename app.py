@@ -164,7 +164,7 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
     dosis_ppm = [ppm_jarra_1, ppm_jarra_2, ppm_jarra_3, ppm_jarra_4]
     
     # Mostrar la dosis total seleccionada
-    st.info(f"Se calculará la dosificación para las dosis (ppm): {dosis_ppm[0]:.1f}, {dosis_ppm[1]:.1f}, {dosis_ppm[2]:.1f}, {dosis_ppm[3]:.1f}")
+    st.info(f"Se calculará la dosificación para las dosis (ppm): {dosis_ppm[0]:.0f}, {dosis_ppm[1]:.0f}, {dosis_ppm[2]:.0f}, {dosis_ppm[3]:.0f}")
         
     st.write('---')
 
