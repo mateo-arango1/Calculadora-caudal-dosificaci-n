@@ -141,7 +141,7 @@ elif modo == 'Dosificación en Jarras (mL de producto)':
 
     with col1:
         st.subheader("Datos del Producto")
-        S_jarra = st.number_input('Concentración Producto (%):', min_value=0, max_value=100, value=10, key='S_jarra', help="Porcentaje de ingrediente activo en el producto químico.")
+        S_jarra = st.number_input('Concentración Producto (%):', min_value=0.01, max_value=100.00, value=10.00, key='S_jarra', help="Porcentaje de ingrediente activo en el producto químico.")
         
     with col2:
         st.subheader("Datos de la Prueba")
