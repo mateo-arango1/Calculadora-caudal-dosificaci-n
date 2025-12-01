@@ -8,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.title('🧪 Calculadora de Dosificación y Jar Test')
+st.title('🧪 Calculadora de Dosificación y Test de jarras')
 st.markdown("---")
 
 # --- Selector de Modo ---
