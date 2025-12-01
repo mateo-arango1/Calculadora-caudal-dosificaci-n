@@ -14,9 +14,8 @@ st.markdown("---")
 # --- Selector de Modo ---
 modo = st.radio(
     "Seleccione el modo de cálculo:",
-    ('Calcular Caudal de Dosificación (mL/min)', 'Calcular Dosis Actual (ppm)'),
-    horizontal=True
-)
+    ('Calcular Caudal de Dosificación (mL/min)', 'Calcular Dosis Actual (ppm)', 'Dosificación en Jarras (mL de producto)'),
+    horizontal=False # Lo ponemos en vertical para que se vea mejor el tercer botón
 
 st.markdown("---")
 
