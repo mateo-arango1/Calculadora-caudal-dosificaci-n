@@ -62,7 +62,7 @@ modo = st.radio(
 st.markdown("---")
 
 # Parámetros fijos
-FACTOR_AJUSTE = 1
+FACTOR_AJUSTE = 0.7
 densidad = 1.0 # g/mL (Asumida)
 
 
